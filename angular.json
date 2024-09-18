@@ -14,9 +14,9 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/my-angular-app",
-            "baseHref": "/"
+            "baseHref": "./",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -24,8 +24,10 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
-              }
+                "input": "src/assets",
+                "output": "assets"
+              },
+              "src/favicon.ico"
             ],
             "styles": [
               "src/styles.css"
@@ -46,7 +48,15 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
             },
             "development": {
               "optimization": false,
@@ -82,7 +92,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
