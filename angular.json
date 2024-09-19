@@ -10,27 +10,30 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": "dist/my-angular-app",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
-          },
+      "build": {
+        "builder": "@angular-devkit/build-angular:application",
+        "options": {
+          "outputPath": "dist/my-angular-app",
+          "index": "src/index.html",
+          "main": "src/main.ts",
+          "baseHref": "./",
+          "polyfills": [
+            "zone.js"
+          ],
+          "tsConfig": "tsconfig.app.json",
+          "assets": [
+            {
+              "glob": "**/*",
+              "input": "src/assets",
+              "output": "assets"
+            },
+            "src/favicon.ico"
+          ],
+          "styles": [
+            "src/styles.css"
+          ],
+          "scripts": []
+        },
           "configurations": {
             "production": {
               "budgets": [
@@ -45,7 +48,15 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
             },
             "development": {
               "optimization": false,
@@ -59,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-angular-app:build:production"
+              "browserTarget": "my-angular-app:build:production"
             },
             "development": {
-              "buildTarget": "my-angular-app:build:development"
+              "browserTarget": "my-angular-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +92,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
